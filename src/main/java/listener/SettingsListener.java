@@ -2,7 +2,9 @@ package listener;
 
 import at.ealwary.jnrchallenge.JnrChallenge;
 import at.ealwary.jnrchallenge.util.ID;
+import at.ealwary.jnrchallenge.view.SettingsView;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -26,36 +28,54 @@ public class SettingsListener implements Listener {
         event.setCancelled(true);
         if (event.getCurrentItem().getType() == Material.GRAY_STAINED_GLASS_PANE) return;
         if (event.getClickedInventory() != event.getView().getTopInventory()) return;
+        Player player = (Player) event.getWhoClicked();
 
         switch (event.getSlot()) {
-            case 10:
-            case 19: {      //keepInventory
-                plugin.getSettings().setKeepInventory(!plugin.getSettings().isKeepInventory());
+            case 11:
+            case 20: {
+                plugin.getSettings().setShowTimer(!plugin.getSettings().isShowTimer());
+                reopenInv(player);
                 break;
             }
 
+
             case 12:
-            case 21: {      //reward
+            case 21: {      //keepInventory
+                plugin.getSettings().setKeepInventory(!plugin.getSettings().isKeepInventory());
+                reopenInv(player);
+                break;
+            }
+
+            case 13:
+            case 22: {      //reward
                 plugin.getSettings().setGetReward(!plugin.getSettings().isGetReward());
+                reopenInv(player);
                 break;
             }
 
             case 14:
             case 23: {      //warn
                 plugin.getSettings().setGetWarnedBeforeTeleport(!plugin.getSettings().isGetWarnedBeforeTeleport());
+                reopenInv(player);
                 break;
             }
 
-            case 16:
-            case 25: {      //saveInventory
+            case 15:
+            case 24: {      //saveInventory
                 plugin.getSettings().setSaveInventorysToMySQL(!plugin.getSettings().isSaveInventorysToMySQL());
+                reopenInv(player);
                 break;
             }
 
             default: {
                 break;
             }
-
         }
+    }
+
+    private void reopenInv(Player player) {
+        SettingsView settingsView = new SettingsView(plugin, player);
+        settingsView.build();
+        settingsView.show();
     }
 }

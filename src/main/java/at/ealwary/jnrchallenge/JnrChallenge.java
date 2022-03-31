@@ -6,6 +6,7 @@ import at.ealwary.jnrchallenge.object.Settings;
 import at.ealwary.jnrchallenge.object.Time;
 import at.ealwary.jnrchallenge.timer.JnrTimer;
 import at.ealwary.jnrchallenge.util.RewardUtil;
+import at.ealwary.jnrchallenge.util.TimerUtil;
 import at.ealwary.jnrchallenge.util.WorldUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -30,6 +31,7 @@ public final class JnrChallenge extends JavaPlugin {
     private Time time;
     private Settings settings;
     private RewardUtil rewardUtil;
+    private TimerUtil timerUtil;
 
     @Override
     public void onEnable() {
@@ -58,6 +60,7 @@ public final class JnrChallenge extends JavaPlugin {
         rewardUtil = new RewardUtil(this);
         playerInventories = new HashMap<>();
         normalLocations = new HashMap<>();
+        timerUtil = new TimerUtil(this);
 
         new JnrLocation(this);
 
@@ -98,6 +101,10 @@ public final class JnrChallenge extends JavaPlugin {
 
     public HashMap<Player, Location> getNormalLocations() {
         return normalLocations;
+    }
+
+    public TimerUtil getTimerUtil() {
+        return timerUtil;
     }
 
     public void setJnrWorld(World jnrWorld) {

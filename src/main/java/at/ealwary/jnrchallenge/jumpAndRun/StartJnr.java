@@ -3,6 +3,7 @@ package at.ealwary.jnrchallenge.jumpAndRun;
 import at.ealwary.jnrchallenge.JnrChallenge;
 import at.ealwary.jnrchallenge.object.Jnr;
 import at.ealwary.jnrchallenge.object.Settings;
+import at.ealwary.jnrchallenge.util.ID;
 
 public class StartJnr {
     private JnrChallenge plugin;
@@ -18,9 +19,16 @@ public class StartJnr {
         }
         this.jnr = plugin.getJumpAndRuns().get(0);
 
+        sendMessageToPlayers();
         saveInventories();
         buildJnr();
         teleport();
+    }
+
+    public void sendMessageToPlayers() {
+        plugin.getPlayerHashMap().forEach((key, value) -> {
+            key.sendMessage(ID.TP_MESSAGE);
+        });
     }
 
     public void saveInventories() {

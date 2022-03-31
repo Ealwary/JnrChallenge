@@ -1,5 +1,6 @@
 package at.ealwary.jnrchallenge.command;
 
+import at.ealwary.jnrchallenge.JnrChallenge;
 import at.ealwary.jnrchallenge.util.ID;
 import at.ealwary.jnrchallenge.view.SettingsView;
 import org.bukkit.Bukkit;
@@ -9,8 +10,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class SettingsCommand implements CommandExecutor {
+    private JnrChallenge plugin;
     private SettingsView settingsView;
 
+    public SettingsCommand(JnrChallenge plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -24,7 +29,7 @@ public class SettingsCommand implements CommandExecutor {
             return false;
         }
 
-        settingsView = new SettingsView(player);
+        settingsView = new SettingsView(plugin, player);
         settingsView.build();
         settingsView.show();
 

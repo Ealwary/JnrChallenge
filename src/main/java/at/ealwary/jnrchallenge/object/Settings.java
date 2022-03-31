@@ -2,18 +2,23 @@ package at.ealwary.jnrchallenge.object;
 
 public class Settings {
 
+    private boolean showTimer;
     private boolean keepInventory;
-    private boolean getReward;
-    private boolean getWarnedBeforeTeleport;
+    private boolean getReward;                      //
+    private boolean getWarnedBeforeTeleport;        //
     private boolean saveInventorysToMySQL;
 
     public Settings() {
+        this.showTimer = true;
         this.keepInventory = true;
         this.getReward = true;
         this.getWarnedBeforeTeleport = true;
         this.saveInventorysToMySQL = false;
     }
 
+    public boolean isShowTimer() {
+        return showTimer;
+    }
 
     public boolean isKeepInventory() {
         return keepInventory;
@@ -25,6 +30,10 @@ public class Settings {
 
     public boolean isSaveInventorysToMySQL() {
         return saveInventorysToMySQL;
+    }
+
+    public void setShowTimer(boolean showTimer) {
+        this.showTimer = showTimer;
     }
 
     public boolean isGetWarnedBeforeTeleport() {

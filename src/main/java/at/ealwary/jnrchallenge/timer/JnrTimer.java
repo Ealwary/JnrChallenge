@@ -3,6 +3,7 @@ package at.ealwary.jnrchallenge.timer;
 import at.ealwary.jnrchallenge.JnrChallenge;
 import at.ealwary.jnrchallenge.jumpAndRun.StartJnr;
 import at.ealwary.jnrchallenge.object.Time;
+import at.ealwary.jnrchallenge.util.ID;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -48,9 +49,25 @@ public class JnrTimer extends Timer {
                 counter++;
                 plugin.getTime().addCounter();
 
+                if (plugin.getSettings().isShowTimer()) {
+                    plugin.getTimerUtil().setTimer();
+                }
+
                 if (plugin.getTime().isCountdownFinished()) {
                     new StartJnr(plugin);
                     stop();
+                } else if (plugin.getTime().isCountdownFinished(plugin.getTime().getCounter() + 3)) {
+                    plugin.getPlayerHashMap().forEach((key, value) -> {
+                        key.sendMessage(ID.TP_WARN_MESSAGE_3);
+                    });
+                } else if (plugin.getTime().isCountdownFinished(plugin.getTime().getCounter() + 2)) {
+                    plugin.getPlayerHashMap().forEach((key, value) -> {
+                        key.sendMessage(ID.TP_WARN_MESSAGE_2);
+                    });
+                } else if (plugin.getTime().isCountdownFinished(plugin.getTime().getCounter() + 1)) {
+                    plugin.getPlayerHashMap().forEach((key, value) -> {
+                        key.sendMessage(ID.TP_WARN_MESSAGE_1);
+                    });
                 }
             }
         }, 20, 20);
