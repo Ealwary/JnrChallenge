@@ -4,13 +4,16 @@ import at.ealwary.jnrchallenge.jumpAndRun.JnrLocation;
 import at.ealwary.jnrchallenge.object.Jnr;
 import at.ealwary.jnrchallenge.object.Settings;
 import at.ealwary.jnrchallenge.object.Time;
+import at.ealwary.jnrchallenge.provider.DatabaseProvider;
 import at.ealwary.jnrchallenge.timer.JnrTimer;
+import at.ealwary.jnrchallenge.util.ID;
 import at.ealwary.jnrchallenge.util.RewardUtil;
 import at.ealwary.jnrchallenge.util.TimerUtil;
 import at.ealwary.jnrchallenge.util.WorldUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.PluginManager;
@@ -24,7 +27,7 @@ public final class JnrChallenge extends JavaPlugin {
 
     private World jnrWorld;
     private JnrLocation jnrLocation;
-    private ArrayList<Jnr> jumpAndRuns;
+    private Jnr currentJnr;
     private HashMap<Player, Integer> playerHashMap;         //0 = ingame; 1 = geschafft; 2 = tot;
     private HashMap<Player, PlayerInventory> playerInventories;
     private HashMap<Player, Location> normalLocations;
@@ -33,11 +36,13 @@ public final class JnrChallenge extends JavaPlugin {
     private RewardUtil rewardUtil;
     private TimerUtil timerUtil;
     private JnrTimer jnrTimer;
+    private DatabaseProvider databaseProvider;
+    FileConfiguration config;
 
     @Override
     public void onEnable() {
-        jnrLocation = new JnrLocation(this);
-        jumpAndRuns = new ArrayList<>();
+//        jnrLocation = new JnrLocation(this);
+        currentJnr = null;
         playerHashMap = new HashMap<>();
         init(Bukkit.getPluginManager());
 
@@ -45,17 +50,21 @@ public final class JnrChallenge extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        databaseProvider.disconnect();
     }
 
     private void init(PluginManager pluginManager) {
+        config = getConfig();
+
+        databaseProvider = new DatabaseProvider(config.getString(ID.CPATH_HOST), config.getString(ID.CPATH_DATABASE), config.getString(ID.CPATH_USER), config.getString(ID.CPATH_PSWD));
+
         WorldUtil worldUtil = new WorldUtil(this);
         jnrTimer = new JnrTimer(this);
 
         worldUtil.createWorld();
         jnrTimer.start();
-        jnrLocation.createJnr();
-        jnrLocation.fillJnr();
+//        jnrLocation.createJnr();
+//        jnrLocation.fillJnr();
         time = new Time(0);
         settings = new Settings();
         rewardUtil = new RewardUtil(this);
@@ -63,17 +72,15 @@ public final class JnrChallenge extends JavaPlugin {
         normalLocations = new HashMap<>();
         timerUtil = new TimerUtil(this);
 
-        new JnrLocation(this);
-
-        Collections.shuffle(jumpAndRuns);
+//        new JnrLocation(this);
     }
 
     public HashMap<Player, Integer> getPlayerHashMap() {
         return playerHashMap;
     }
 
-    public ArrayList<Jnr> getJumpAndRuns() {
-        return jumpAndRuns;
+    public Jnr getCurrentJnr() {
+        return currentJnr;
     }
 
     public World getJnrWorld() {
@@ -112,9 +119,15 @@ public final class JnrChallenge extends JavaPlugin {
         return jnrTimer;
     }
 
+    public DatabaseProvider getDatabaseProvider() {
+        return databaseProvider;
+    }
+
     public void setJnrWorld(World jnrWorld) {
         this.jnrWorld = jnrWorld;
     }
 
 
 }
+
+//Delete JnrLocation?

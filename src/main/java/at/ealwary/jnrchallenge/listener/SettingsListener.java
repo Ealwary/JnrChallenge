@@ -1,4 +1,4 @@
-package listener;
+package at.ealwary.jnrchallenge.listener;
 
 import at.ealwary.jnrchallenge.JnrChallenge;
 import at.ealwary.jnrchallenge.util.ID;
@@ -32,7 +32,7 @@ public class SettingsListener implements Listener {
 
         switch (event.getSlot()) {
             case 11:
-            case 20: {
+            case 20: {      //timer
                 plugin.getSettings().setShowTimer(!plugin.getSettings().isShowTimer());
                 reopenInv(player);
                 break;
@@ -41,8 +41,13 @@ public class SettingsListener implements Listener {
 
             case 12:
             case 21: {      //keepInventory
-                plugin.getSettings().setKeepInventory(!plugin.getSettings().isKeepInventory());
-                reopenInv(player);
+                if(plugin.getDatabaseProvider().isSQLConnected()) {
+                    plugin.getSettings().setKeepInventory(!plugin.getSettings().isKeepInventory());
+                    reopenInv(player);
+                } else {
+                    player.closeInventory();
+                    player.sendMessage(ID.NO_MYSQL_CON);
+                }
                 break;
             }
 

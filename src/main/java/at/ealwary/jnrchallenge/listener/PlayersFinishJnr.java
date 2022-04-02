@@ -1,4 +1,4 @@
-package listener;
+package at.ealwary.jnrchallenge.listener;
 
 import at.ealwary.jnrchallenge.JnrChallenge;
 import at.ealwary.jnrchallenge.jumpAndRun.StopJnr;

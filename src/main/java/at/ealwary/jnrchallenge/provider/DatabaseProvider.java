@@ -23,7 +23,7 @@ public class DatabaseProvider {
     }
 
     private void connect() {
-        if(!sqlIsConnected()) {
+        if(!isSQLConnected()) {
             try {
                 this.connection = DriverManager.getConnection("jdbc:mysql://" + host + ":3306/" + database + "?autoReconnect=true", user, password);
 
@@ -60,7 +60,7 @@ public class DatabaseProvider {
         return connection;
     }
 
-    public boolean sqlIsConnected() {
+    public boolean isSQLConnected() {
         return getConnection() != null;
     }
 }
