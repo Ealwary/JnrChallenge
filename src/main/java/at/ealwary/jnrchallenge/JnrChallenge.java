@@ -32,6 +32,7 @@ public final class JnrChallenge extends JavaPlugin {
     private Settings settings;
     private RewardUtil rewardUtil;
     private TimerUtil timerUtil;
+    private JnrTimer jnrTimer;
 
     @Override
     public void onEnable() {
@@ -49,10 +50,10 @@ public final class JnrChallenge extends JavaPlugin {
 
     private void init(PluginManager pluginManager) {
         WorldUtil worldUtil = new WorldUtil(this);
-        JnrTimer jnrTimer = new JnrTimer(this);
+        jnrTimer = new JnrTimer(this);
 
         worldUtil.createWorld();
-        jnrTimer.timeJnr();
+        jnrTimer.start();
         jnrLocation.createJnr();
         jnrLocation.fillJnr();
         time = new Time(0);
@@ -105,6 +106,10 @@ public final class JnrChallenge extends JavaPlugin {
 
     public TimerUtil getTimerUtil() {
         return timerUtil;
+    }
+
+    public JnrTimer getJnrTimer() {
+        return jnrTimer;
     }
 
     public void setJnrWorld(World jnrWorld) {
