@@ -29,7 +29,7 @@ public final class JnrChallenge extends JavaPlugin {
     private JnrLocation jnrLocation;
     private Jnr currentJnr;
     private HashMap<Player, Integer> playerHashMap;         //0 = ingame; 1 = geschafft; 2 = tot;
-    private HashMap<Player, PlayerInventory> playerInventories;
+    private HashMap<Player, String> playerInventories;
     private HashMap<Player, Location> normalLocations;
     private Time time;
     private Settings settings;
@@ -103,7 +103,7 @@ public final class JnrChallenge extends JavaPlugin {
         return rewardUtil;
     }
 
-    public HashMap<Player, PlayerInventory> getPlayerInventories() {
+    public HashMap<Player, String> getPlayerInventories() {
         return playerInventories;
     }
 
@@ -131,3 +131,4 @@ public final class JnrChallenge extends JavaPlugin {
 }
 
 //Delete JnrLocation?
+//PlayerInvenotrys: Clear after restore

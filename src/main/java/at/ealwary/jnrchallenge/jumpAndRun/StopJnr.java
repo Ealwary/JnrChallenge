@@ -18,7 +18,7 @@ public class StopJnr {
 
     public StopJnr(JnrChallenge plugin) {
         this.plugin = plugin;
-        this.jnr = plugin.getJumpAndRuns().get(0);
+        this.jnr = plugin.getCurrentJnr();
 
         settings = plugin.getSettings();
 
@@ -26,7 +26,6 @@ public class StopJnr {
         restoreInventory();
         giveReward();
         continueTimer();
-        removeJnr();
         resetStats();
     }
 
@@ -45,7 +44,7 @@ public class StopJnr {
     }
 
     private void restoreInventory() {
-        HashMap<Player, PlayerInventory> playerInventories = plugin.getPlayerInventories();
+        HashMap<Player, String> playerInventories = plugin.getPlayerInventories();
         boolean keepInventory = settings.isKeepInventory();
 
         plugin.getPlayerHashMap().forEach((key, value) -> {
@@ -72,11 +71,6 @@ public class StopJnr {
 
     private void continueTimer() {
         new JnrTimer(plugin).start();
-    }
-
-    private void removeJnr() {
-        jnr.remove();
-        plugin.getJumpAndRuns().remove(0);
     }
 
     private void resetStats() {
