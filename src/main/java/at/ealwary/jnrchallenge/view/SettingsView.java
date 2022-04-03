@@ -27,10 +27,10 @@ public class SettingsView {
 
         fill9_4(inventory);
         inventory.setItem(11, new ItemBuilder(Material.CLOCK).setDisplayName("§6Timer anzeigen").setLore("§aWenn aktiviert: §rZeigt dir den Timer an.").create());
-        inventory.setItem(12, new ItemBuilder(Material.CHEST).setDisplayName("§6Inventar behalten").setLore("§aWenn aktiviert: §rBehalte dein Inventar, ", "wenn du bei einem Jump and Run stirbst.").create());
-        inventory.setItem(13, new ItemBuilder(Material.DIAMOND).setDisplayName("§6Belohnungen").setLore("§aWenn aktiviert: §rErhalte eine zufällige Belohnung,", "wenn du ein Jump and Run schaffst.").addEnchantment(Enchantment.DURABILITY, 0).create());
-        inventory.setItem(14, new ItemBuilder(Material.REDSTONE).setDisplayName("§6Warnung vor JumpAndRun").setLore("§aWenn aktiviert: §rErhalte eine Chatnachricht", "bevor du in ein JumpAndRun teleportiert wirst.").create());
-        inventory.setItem(15, new ItemBuilder(Material.ENDER_CHEST).setDisplayName("§6Sichere Speicherung").setLore("§aWenn aktiviert: §rInventare werden in Datenbank gespeichert", "(Vorteil: Falls der Server während eines Jump and Runs", "abstürzt, gehen die Inventare nicht verloren.").create());
+        inventory.setItem(12, new ItemBuilder(Material.CHEST).setDisplayName("§6Inventar behalten").setLore("§aWenn aktiviert: §rBehalte dein Inventar, ", "§rwenn du bei einem Jump and Run stirbst.").create());
+        inventory.setItem(13, new ItemBuilder(Material.DIAMOND).setDisplayName("§6Belohnungen").setLore("§aWenn aktiviert: §rErhalte eine zufällige Belohnung,", "§rwenn du ein Jump and Run schaffst.").addEnchantment(Enchantment.DURABILITY, 0).create());
+        inventory.setItem(14, new ItemBuilder(Material.REDSTONE).setDisplayName("§6Warnung vor JumpAndRun").setLore("§aWenn aktiviert: §rErhalte eine Chatnachricht", "§rbevor du in ein JumpAndRun teleportiert wirst.").create());
+        inventory.setItem(15, new ItemBuilder(Material.ENDER_CHEST).setDisplayName("§6Sichere Speicherung").setLore("§aWenn aktiviert: §rInventare werden in Datenbank gespeichert", "§r(Vorteil: Falls der Server während eines Jump and Runs", "§rabstürzt, gehen die Inventare nicht verloren.").create());
 
 
         if(settings.isShowTimer()) {
@@ -39,19 +39,19 @@ public class SettingsView {
             inventory.setItem(20, new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayName("§c§l» Deaktiviert").create());
         }
 
-        if(settings.isGetReward()) {
+        if(settings.isKeepInventory()) {
             inventory.setItem(21, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE).setDisplayName("§a§l» Aktiviert").create());
         } else {
             inventory.setItem(21, new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayName("§c§l» Deaktiviert").create());
         }
 
-        if(settings.isGetWarnedBeforeTeleport()) {
+        if(settings.isGetReward()) {
             inventory.setItem(22, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE).setDisplayName("§a§l» Aktiviert").create());
         } else {
             inventory.setItem(22, new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayName("§c§l» Deaktiviert").create());
         }
 
-        if(settings.isSaveInventorysToMySQL()) {
+        if(settings.isGetWarnedBeforeTeleport()) {
             inventory.setItem(23, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE).setDisplayName("§a§l» Aktiviert").create());
         } else {
             inventory.setItem(23, new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayName("§c§l» Deaktiviert").create());
@@ -62,6 +62,8 @@ public class SettingsView {
         } else {
             inventory.setItem(24, new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayName("§c§l» Deaktiviert").create());
         }
+
+
     }
 
     public void show() {

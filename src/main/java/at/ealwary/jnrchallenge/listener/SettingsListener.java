@@ -2,6 +2,7 @@ package at.ealwary.jnrchallenge.listener;
 
 import at.ealwary.jnrchallenge.JnrChallenge;
 import at.ealwary.jnrchallenge.util.ID;
+import at.ealwary.jnrchallenge.util.TimerUtil;
 import at.ealwary.jnrchallenge.view.SettingsView;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -11,9 +12,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class SettingsListener implements Listener {
     private JnrChallenge plugin;
+    private TimerUtil timerUtil;
 
     public SettingsListener(JnrChallenge plugin) {
         this.plugin = plugin;
+        timerUtil = plugin.getTimerUtil();
     }
 
     @EventHandler
@@ -35,19 +38,17 @@ public class SettingsListener implements Listener {
             case 20: {      //timer
                 plugin.getSettings().setShowTimer(!plugin.getSettings().isShowTimer());
                 reopenInv(player);
+                if (plugin.getSettings().isShowTimer()) {
+                    timerUtil.setTimer();
+                }
                 break;
             }
 
 
             case 12:
             case 21: {      //keepInventory
-                if(plugin.getDatabaseProvider().isSQLConnected()) {
-                    plugin.getSettings().setKeepInventory(!plugin.getSettings().isKeepInventory());
-                    reopenInv(player);
-                } else {
-                    player.closeInventory();
-                    player.sendMessage(ID.NO_MYSQL_CON);
-                }
+                plugin.getSettings().setKeepInventory(!plugin.getSettings().isKeepInventory());
+                reopenInv(player);
                 break;
             }
 
@@ -67,8 +68,12 @@ public class SettingsListener implements Listener {
 
             case 15:
             case 24: {      //saveInventory
-                plugin.getSettings().setSaveInventorysToMySQL(!plugin.getSettings().isSaveInventorysToMySQL());
-                reopenInv(player);
+                if (plugin.getDatabaseProvider().isSQLConnected()) {
+                    plugin.getSettings().setSaveInventorysToMySQL(!plugin.getSettings().isSaveInventorysToMySQL());
+                    reopenInv(player);
+                } else {
+                    player.sendMessage(ID.NO_MYSQL_CON);
+                }
                 break;
             }
 

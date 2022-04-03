@@ -2,3 +2,10 @@ name: JnrChallenge
 version: 1.0
 main: at.ealwary.jnrchallenge.JnrChallenge
 api-version: 1.16
+
+commands:
+   settings:
+     aliases:
+       - einstellungen
+
+   challenge:

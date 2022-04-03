@@ -1,12 +1,17 @@
 package at.ealwary.jnrchallenge.jumpAndRun;
 
 import at.ealwary.jnrchallenge.JnrChallenge;
+import at.ealwary.jnrchallenge.object.InventoryItem;
 import at.ealwary.jnrchallenge.object.Jnr;
 import at.ealwary.jnrchallenge.object.Settings;
 import at.ealwary.jnrchallenge.util.ID;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.PlayerInventory;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class StartJnr {
@@ -18,11 +23,16 @@ public class StartJnr {
         this.plugin = plugin;
         settings = plugin.getSettings();
 
+        stopTimer();
         createJnr();
         sendMessageToPlayers();
         saveInventories();
         buildJnr();
         teleport();
+    }
+
+    private void stopTimer() {
+        plugin.getJnrTimer().stop();
     }
 
     public void createJnr() {
@@ -54,12 +64,17 @@ public class StartJnr {
 
     public void saveInventories() {
         plugin.getPlayerHashMap().forEach((key, value) -> {
-            plugin.getPlayerInventories().put(key, key.getInventory());
+            PlayerInventory inventory = key.getInventory();
+            ArrayList<InventoryItem> items = new ArrayList<>();
+
+            for (int i = 5; i < inventory.getSize() - 5; i++) {
+                if (inventory.getItem(i) != null) {
+                    items.add(new InventoryItem(inventory.getItem(i), i));
+                }
+            }
+            plugin.getPlayerInventories().put(key, items);
+            key.getInventory().clear();
         });
-
-        if (!settings.isSaveInventorysToMySQL()) return;
-
-        //push Inventories
     }
 
     private void buildJnr() {

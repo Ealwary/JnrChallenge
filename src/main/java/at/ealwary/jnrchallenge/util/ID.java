@@ -14,7 +14,7 @@ public class ID {
             CHALLENGE_ALREADY_RUNNING = PREFIX + "§cDie Challenge läuft bereits.",
             CHALLENGE_ALREADY_PAUSED = PREFIX + "§cDie Challenge ist bereits pausiert.",
             CHALLENGE_PAUSED = PREFIX + "§aDie Challenge wurde pausiert.",
-            CHALLENGE_RESUMED = PREFIX + "§cDie Challenge wird ",
+            CHALLENGE_RESUMED = PREFIX + "§aDie Challenge wird ",
             NO_MYSQL_CON = PREFIX + "§cDa keine MySQL-Connection vorhanden ist, kann diese Einstellung nicht aktiviert werden (Überprüfe die config.yml)";
 
 
@@ -40,5 +40,8 @@ public class ID {
             CPATH_DATABASE = "mysql.database",
             CPATH_USER = "mysql.user",
             CPATH_PSWD = "mysql.password";
+
+    //World name
+    public static final String JNR_WORLD_NAME = "JumpAndRunWorld";
 
 }

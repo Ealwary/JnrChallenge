@@ -20,7 +20,7 @@ public class JnrTimer extends Timer {
     @Override
     public void start() {
         isRunning = true;
-        taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new BukkitRunnable() {
+        taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
             @Override
             public void run() {
                 plugin.getTime().addCounter();

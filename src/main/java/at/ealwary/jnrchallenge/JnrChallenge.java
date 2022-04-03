@@ -1,6 +1,10 @@
 package at.ealwary.jnrchallenge;
 
+import at.ealwary.jnrchallenge.command.ChallengeCommand;
+import at.ealwary.jnrchallenge.command.SettingsCommand;
 import at.ealwary.jnrchallenge.jumpAndRun.JnrLocation;
+import at.ealwary.jnrchallenge.listener.*;
+import at.ealwary.jnrchallenge.object.InventoryItem;
 import at.ealwary.jnrchallenge.object.Jnr;
 import at.ealwary.jnrchallenge.object.Settings;
 import at.ealwary.jnrchallenge.object.Time;
@@ -29,7 +33,7 @@ public final class JnrChallenge extends JavaPlugin {
     private JnrLocation jnrLocation;
     private Jnr currentJnr;
     private HashMap<Player, Integer> playerHashMap;         //0 = ingame; 1 = geschafft; 2 = tot;
-    private HashMap<Player, String> playerInventories;
+    private HashMap<Player, ArrayList<InventoryItem>> playerInventories;
     private HashMap<Player, Location> normalLocations;
     private Time time;
     private Settings settings;
@@ -57,6 +61,15 @@ public final class JnrChallenge extends JavaPlugin {
         config = getConfig();
 
         databaseProvider = new DatabaseProvider(config.getString(ID.CPATH_HOST), config.getString(ID.CPATH_DATABASE), config.getString(ID.CPATH_USER), config.getString(ID.CPATH_PSWD));
+
+        pluginManager.registerEvents(new EnvironmentListener(this), this);
+        pluginManager.registerEvents(new PlayerConnectionListener(this), this);
+        pluginManager.registerEvents(new PlayerDamageListener(this), this);
+        pluginManager.registerEvents(new PlayersFinishJnr(this), this);
+        pluginManager.registerEvents(new SettingsListener(this), this);
+
+        getCommand("challenge").setExecutor(new ChallengeCommand(this));
+        getCommand("settings").setExecutor(new SettingsCommand(this));
 
         WorldUtil worldUtil = new WorldUtil(this);
         jnrTimer = new JnrTimer(this);
@@ -103,7 +116,7 @@ public final class JnrChallenge extends JavaPlugin {
         return rewardUtil;
     }
 
-    public HashMap<Player, String> getPlayerInventories() {
+    public HashMap<Player, ArrayList<InventoryItem>> getPlayerInventories() {
         return playerInventories;
     }
 
@@ -127,7 +140,9 @@ public final class JnrChallenge extends JavaPlugin {
         this.jnrWorld = jnrWorld;
     }
 
-
+    public void setJnrTimer(JnrTimer jnrTimer) {
+        this.jnrTimer = jnrTimer;
+    }
 }
 
 //Delete JnrLocation?

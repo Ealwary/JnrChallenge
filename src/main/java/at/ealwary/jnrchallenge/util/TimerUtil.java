@@ -55,6 +55,11 @@ public class TimerUtil {
         plugin.getPlayerHashMap().forEach((key,value)-> {
             key.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(getTimeString()));
         });
+    }
 
+    public void deleteTimer() {
+        plugin.getPlayerHashMap().forEach((key,value)-> {
+            key.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(""));
+        });
     }
 }

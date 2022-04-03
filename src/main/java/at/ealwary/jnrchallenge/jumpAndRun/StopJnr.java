@@ -1,6 +1,7 @@
 package at.ealwary.jnrchallenge.jumpAndRun;
 
 import at.ealwary.jnrchallenge.JnrChallenge;
+import at.ealwary.jnrchallenge.object.InventoryItem;
 import at.ealwary.jnrchallenge.object.Jnr;
 import at.ealwary.jnrchallenge.object.Settings;
 import at.ealwary.jnrchallenge.timer.JnrTimer;
@@ -9,6 +10,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StopJnr {
@@ -44,17 +46,25 @@ public class StopJnr {
     }
 
     private void restoreInventory() {
-        HashMap<Player, String> playerInventories = plugin.getPlayerInventories();
+        HashMap<Player, ArrayList<InventoryItem>> playerInventories = plugin.getPlayerInventories();
         boolean keepInventory = settings.isKeepInventory();
 
         plugin.getPlayerHashMap().forEach((key, value) -> {
             if (value != 2) {
                 key.getInventory().clear();
-                //Set Inventory
+                ArrayList<InventoryItem> items = plugin.getPlayerInventories().get(key);
+                for (int i = 0; i < items.size(); i++) {
+                    key.getInventory().setItem(items.get(i).getSlot(), items.get(i).getItemStack());
+                }
+                plugin.getPlayerInventories().remove(key);
             } else {
                 if (keepInventory) {
                     key.getInventory().clear();
-                    //Set Inventory
+                    ArrayList<InventoryItem> items = plugin.getPlayerInventories().get(key);
+                    for (int i = 0; i < items.size(); i++) {
+                        key.getInventory().setItem(items.get(i).getSlot(), items.get(i).getItemStack());
+                    }
+                    plugin.getPlayerInventories().remove(key);
                 } else {
                     key.getInventory().clear();
                 }
@@ -70,7 +80,9 @@ public class StopJnr {
     }
 
     private void continueTimer() {
-        new JnrTimer(plugin).start();
+        JnrTimer timer = new JnrTimer(plugin);
+        timer.start();
+        plugin.setJnrTimer(timer);
     }
 
     private void resetStats() {

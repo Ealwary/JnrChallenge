@@ -1,6 +1,7 @@
 package at.ealwary.jnrchallenge.command;
 
 import at.ealwary.jnrchallenge.JnrChallenge;
+import at.ealwary.jnrchallenge.timer.JnrTimer;
 import at.ealwary.jnrchallenge.util.ID;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -38,12 +39,16 @@ public class ChallengeCommand implements CommandExecutor {
             if(plugin.getJnrTimer().isRunning()) {
                 player.sendMessage(ID.CHALLENGE_ALREADY_RUNNING);
             } else {
+                JnrTimer jnrTimer = new JnrTimer(plugin);
+                plugin.setJnrTimer(jnrTimer);
+                plugin.getJnrTimer().start();
                 player.sendMessage(ID.CHALLENGE_RESUMED + (args[0].equalsIgnoreCase("start") ? "gestartet." : "fortgesetzt."));
             }
         } else if (args[0].equalsIgnoreCase("pause")) {
             if(!plugin.getJnrTimer().isRunning()) {
                 player.sendMessage(ID.CHALLENGE_ALREADY_PAUSED);
             } else {
+                plugin.getJnrTimer().stop();
                 player.sendMessage(ID.CHALLENGE_PAUSED);
             }
         } else {

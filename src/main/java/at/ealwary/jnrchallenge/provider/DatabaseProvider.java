@@ -29,7 +29,7 @@ public class DatabaseProvider {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                Bukkit.getConsoleSender().sendMessage("§c[BirthdayPlugin] Verbindung zur Datenbank gescheitert. Die Speicherung von Inventaren in MySQL funktioniert derzeit nicht und wird deaktiviert. (Keine/Falsche MySQL LoginDaten -> Check config.yml)§r");
+                Bukkit.getConsoleSender().sendMessage("§c[JnrChallenge] Verbindung zur Datenbank gescheitert. Die Speicherung von Inventaren in MySQL funktioniert derzeit nicht und wird deaktiviert. (Keine/Falsche MySQL LoginDaten -> Check config.yml)§r");
             }
         }
     }
