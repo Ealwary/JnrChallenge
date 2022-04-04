@@ -47,7 +47,7 @@ public class Time {
     }
 
     public void addCounter() {
-        this.counter = counter++;
+        this.counter = this.counter++;
     }
 
     public boolean isCountdownFinished() {

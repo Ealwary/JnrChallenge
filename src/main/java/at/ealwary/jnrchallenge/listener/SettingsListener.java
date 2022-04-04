@@ -1,6 +1,7 @@
 package at.ealwary.jnrchallenge.listener;
 
 import at.ealwary.jnrchallenge.JnrChallenge;
+import at.ealwary.jnrchallenge.object.Settings;
 import at.ealwary.jnrchallenge.util.ID;
 import at.ealwary.jnrchallenge.util.TimerUtil;
 import at.ealwary.jnrchallenge.view.SettingsView;

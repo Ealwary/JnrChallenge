@@ -40,6 +40,8 @@ public class PlayerDamageListener implements Listener {
             return;
         }
 
+        event.setCancelled(true);
+
         player.setGameMode(GameMode.SPECTATOR);
     }
 

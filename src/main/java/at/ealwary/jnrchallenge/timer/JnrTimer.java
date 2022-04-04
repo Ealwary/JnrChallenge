@@ -2,9 +2,9 @@ package at.ealwary.jnrchallenge.timer;
 
 import at.ealwary.jnrchallenge.JnrChallenge;
 import at.ealwary.jnrchallenge.jumpAndRun.StartJnr;
+import at.ealwary.jnrchallenge.object.Time;
 import at.ealwary.jnrchallenge.util.ID;
 import org.bukkit.Bukkit;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class JnrTimer extends Timer {
 
@@ -23,10 +23,11 @@ public class JnrTimer extends Timer {
         taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
             @Override
             public void run() {
-                plugin.getTime().addCounter();
+                plugin.setTime(new Time(plugin.getTime().getCounter() + 1));
 
                 if (plugin.getSettings().isShowTimer()) {
                     plugin.getTimerUtil().setTimer();
+                    Bukkit.broadcastMessage(String.valueOf(plugin.getTime().getCounter()));
                 }
 
                 if (plugin.getTime().isCountdownFinished()) {

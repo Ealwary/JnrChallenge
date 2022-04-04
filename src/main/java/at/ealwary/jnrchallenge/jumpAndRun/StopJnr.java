@@ -28,6 +28,7 @@ public class StopJnr {
         restoreInventory();
         giveReward();
         continueTimer();
+        removeJnr();
         resetStats();
     }
 
@@ -61,8 +62,10 @@ public class StopJnr {
                 if (keepInventory) {
                     key.getInventory().clear();
                     ArrayList<InventoryItem> items = plugin.getPlayerInventories().get(key);
-                    for (int i = 0; i < items.size(); i++) {
-                        key.getInventory().setItem(items.get(i).getSlot(), items.get(i).getItemStack());
+                    if(items != null) {
+                        for (int i = 0; i < items.size(); i++) {
+                            key.getInventory().setItem(items.get(i).getSlot(), items.get(i).getItemStack());
+                        }
                     }
                     plugin.getPlayerInventories().remove(key);
                 } else {
@@ -71,18 +74,16 @@ public class StopJnr {
             }
             playerInventories.remove(key);
         });
-
-
-        plugin.getPlayerHashMap().forEach((key, value) -> {
-            if (value != 2) return;
-            key.getInventory().clear();
-        });
     }
 
     private void continueTimer() {
         JnrTimer timer = new JnrTimer(plugin);
         timer.start();
         plugin.setJnrTimer(timer);
+    }
+
+    private void removeJnr() {
+        jnr.remove();
     }
 
     private void resetStats() {

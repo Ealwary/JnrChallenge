@@ -50,6 +50,9 @@ public final class JnrChallenge extends JavaPlugin {
         playerHashMap = new HashMap<>();
         init(Bukkit.getPluginManager());
 
+        for(Player current : Bukkit.getOnlinePlayers()) {
+            playerHashMap.put(current, 0);
+        }
     }
 
     @Override
@@ -136,12 +139,24 @@ public final class JnrChallenge extends JavaPlugin {
         return databaseProvider;
     }
 
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
     public void setJnrWorld(World jnrWorld) {
         this.jnrWorld = jnrWorld;
     }
 
     public void setJnrTimer(JnrTimer jnrTimer) {
         this.jnrTimer = jnrTimer;
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
+    }
+
+    public void setCurrentJnr(Jnr currentJnr) {
+        this.currentJnr = currentJnr;
     }
 }
 

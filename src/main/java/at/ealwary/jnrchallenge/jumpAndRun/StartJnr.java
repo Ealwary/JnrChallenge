@@ -23,12 +23,19 @@ public class StartJnr {
         this.plugin = plugin;
         settings = plugin.getSettings();
 
+        bindPlayerLocations();
         stopTimer();
         createJnr();
         sendMessageToPlayers();
         saveInventories();
         buildJnr();
         teleport();
+    }
+
+    private void bindPlayerLocations() {
+        plugin.getPlayerHashMap().forEach((key, value) -> {
+            plugin.getNormalLocations().put(key, key.getLocation());
+        });
     }
 
     private void stopTimer() {
@@ -45,15 +52,46 @@ public class StartJnr {
 
         for (int i = 0; i < jumpLocs.length + 1; i++) {
             if (i == 0) {
-                jumpLocs[0] = new Location(world, spawnLocation.getBlockX() + new Random().nextInt(3), spawnLocation.getBlockY() + new Random().nextInt(2), spawnLocation.getBlockZ() + new Random().nextInt(4));
+                int randX = new Random().nextInt(3);
+                int x = spawnLocation.getBlockX() + randX;
+                int randY = new Random().nextInt(2);
+                int y = spawnLocation.getBlockY() + randY;
+                int randZ = new Random().nextInt(5);
+                int z = spawnLocation.getBlockZ() + randZ;
+                if (y != 1) {
+                    z = z + 1;
+                }
+
+                jumpLocs[0] = new Location(world, x, y, z);
             } else if (i == 6) {
-                jumpGoal = new Location(world, jumpLocs[5].getBlockX() + new Random().nextInt(3), jumpLocs[5].getBlockY() + new Random().nextInt(2), jumpLocs[5].getBlockZ() + new Random().nextInt(4));
+                int randX = new Random().nextInt(3);
+                int x = jumpLocs[i - 1].getBlockX() + randX;
+                int randY = new Random().nextInt(2);
+                int y = jumpLocs[i - 1].getBlockY() + randY;
+                int randZ = new Random().nextInt(5);
+                int z = jumpLocs[i - 1].getBlockZ() + randZ;
+                if (y != 1) {
+                    z = z + 1;
+                }
+
+                jumpGoal = new Location(world, x, y, z);
             } else {
-                jumpLocs[i] = new Location(world, jumpLocs[i--].getBlockX() + new Random().nextInt(3), jumpLocs[i--].getBlockY() + new Random().nextInt(2), jumpLocs[i--].getBlockZ() + new Random().nextInt(3) + 1);
+                int randX = new Random().nextInt(3);
+                int x = jumpLocs[i - 1].getBlockX() + randX;
+                int randY = new Random().nextInt(2);
+                int y = jumpLocs[i - 1].getBlockY() + randY;
+                int randZ = new Random().nextInt(5);
+                int z = jumpLocs[i - 1].getBlockZ() + randZ;
+                if (y != 1) {
+                    z = z + 1;
+                }
+
+                jumpLocs[i] = jumpLocs[0] = new Location(world, x, y, z);
             }
         }
 
         this.jnr = new Jnr(plugin, spawnLocation, jumpLocs, jumpGoal);
+        plugin.setCurrentJnr(this.jnr);
     }
 
     public void sendMessageToPlayers() {
