@@ -2,13 +2,13 @@ package at.ealwary.jnrchallenge;
 
 import at.ealwary.jnrchallenge.command.ChallengeCommand;
 import at.ealwary.jnrchallenge.command.SettingsCommand;
+import at.ealwary.jnrchallenge.config.ConfigManager;
 import at.ealwary.jnrchallenge.jumpAndRun.JnrLocation;
 import at.ealwary.jnrchallenge.listener.*;
 import at.ealwary.jnrchallenge.object.InventoryItem;
 import at.ealwary.jnrchallenge.object.Jnr;
 import at.ealwary.jnrchallenge.object.Settings;
 import at.ealwary.jnrchallenge.object.Time;
-import at.ealwary.jnrchallenge.provider.DatabaseProvider;
 import at.ealwary.jnrchallenge.timer.JnrTimer;
 import at.ealwary.jnrchallenge.util.ID;
 import at.ealwary.jnrchallenge.util.RewardUtil;
@@ -19,12 +19,10 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 public final class JnrChallenge extends JavaPlugin {
@@ -40,8 +38,8 @@ public final class JnrChallenge extends JavaPlugin {
     private RewardUtil rewardUtil;
     private TimerUtil timerUtil;
     private JnrTimer jnrTimer;
-    private DatabaseProvider databaseProvider;
-    FileConfiguration config;
+    private FileConfiguration config;
+    private ConfigManager configManager;
 
     @Override
     public void onEnable() {
@@ -57,13 +55,11 @@ public final class JnrChallenge extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        databaseProvider.disconnect();
+        configManager.saveConfig();
     }
 
     private void init(PluginManager pluginManager) {
         config = getConfig();
-
-        databaseProvider = new DatabaseProvider(config.getString(ID.CPATH_HOST), config.getString(ID.CPATH_DATABASE), config.getString(ID.CPATH_USER), config.getString(ID.CPATH_PSWD));
 
         pluginManager.registerEvents(new EnvironmentListener(this), this);
         pluginManager.registerEvents(new PlayerConnectionListener(this), this);
@@ -78,7 +74,6 @@ public final class JnrChallenge extends JavaPlugin {
         jnrTimer = new JnrTimer(this);
 
         worldUtil.createWorld();
-        jnrTimer.start();
 //        jnrLocation.createJnr();
 //        jnrLocation.fillJnr();
         time = new Time(0);
@@ -87,6 +82,9 @@ public final class JnrChallenge extends JavaPlugin {
         playerInventories = new HashMap<>();
         normalLocations = new HashMap<>();
         timerUtil = new TimerUtil(this);
+        configManager = new ConfigManager(this);
+        configManager.loadConfig();
+        configManager.saveConfigAsynchronously();
 
 //        new JnrLocation(this);
     }
@@ -135,10 +133,6 @@ public final class JnrChallenge extends JavaPlugin {
         return jnrTimer;
     }
 
-    public DatabaseProvider getDatabaseProvider() {
-        return databaseProvider;
-    }
-
     public void setTime(Time time) {
         this.time = time;
     }
@@ -162,3 +156,4 @@ public final class JnrChallenge extends JavaPlugin {
 
 //Delete JnrLocation?
 //PlayerInvenotrys: Clear after restore
+//Recognise goal

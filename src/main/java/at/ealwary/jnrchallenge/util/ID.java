@@ -36,10 +36,11 @@ public class ID {
 
 
     //Config Paths
-    public static final String CPATH_HOST = "mysql.host",
-            CPATH_DATABASE = "mysql.database",
-            CPATH_USER = "mysql.user",
-            CPATH_PSWD = "mysql.password";
+    public static final String CPATH_SHOW_TIMER = "settings.showtimer",
+            CPATH_KEEP_INV = "settings.keepinventory",
+            CPATH_GET_REWARD = "settings.getreward",
+            CPATH_WARN_BEFORE_TP = "settings.warnbeforetp",
+            CPATH_COUNTER = "counter";
 
     //World name
     public static final String JNR_WORLD_NAME = "JumpAndRunWorld";

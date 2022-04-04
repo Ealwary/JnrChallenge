@@ -86,7 +86,7 @@ public class StartJnr {
                     z = z + 1;
                 }
 
-                jumpLocs[i] = jumpLocs[0] = new Location(world, x, y, z);
+                jumpLocs[i] = new Location(world, x, y, z);
             }
         }
 
@@ -105,7 +105,7 @@ public class StartJnr {
             PlayerInventory inventory = key.getInventory();
             ArrayList<InventoryItem> items = new ArrayList<>();
 
-            for (int i = 5; i < inventory.getSize() - 5; i++) {
+            for (int i = 0; i < inventory.getSize(); i++) {
                 if (inventory.getItem(i) != null) {
                     items.add(new InventoryItem(inventory.getItem(i), i));
                 }

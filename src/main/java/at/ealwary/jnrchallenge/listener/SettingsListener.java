@@ -69,12 +69,7 @@ public class SettingsListener implements Listener {
 
             case 15:
             case 24: {      //saveInventory
-                if (plugin.getDatabaseProvider().isSQLConnected()) {
-                    plugin.getSettings().setSaveInventorysToMySQL(!plugin.getSettings().isSaveInventorysToMySQL());
-                    reopenInv(player);
-                } else {
-                    player.sendMessage(ID.NO_MYSQL_CON);
-                }
+
                 break;
             }
 

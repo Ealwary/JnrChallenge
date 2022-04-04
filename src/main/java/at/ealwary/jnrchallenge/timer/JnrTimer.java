@@ -34,17 +34,23 @@ public class JnrTimer extends Timer {
                     new StartJnr(plugin);
                     stop();
                 } else if (plugin.getTime().isCountdownFinished(plugin.getTime().getCounter() + 3)) {
-                    plugin.getPlayerHashMap().forEach((key, value) -> {
-                        key.sendMessage(ID.TP_WARN_MESSAGE_3);
-                    });
+                    if (plugin.getSettings().isGetWarnedBeforeTeleport()) {
+                        plugin.getPlayerHashMap().forEach((key, value) -> {
+                            key.sendMessage(ID.TP_WARN_MESSAGE_3);
+                        });
+                    }
                 } else if (plugin.getTime().isCountdownFinished(plugin.getTime().getCounter() + 2)) {
-                    plugin.getPlayerHashMap().forEach((key, value) -> {
-                        key.sendMessage(ID.TP_WARN_MESSAGE_2);
-                    });
+                    if (plugin.getSettings().isGetWarnedBeforeTeleport()) {
+                        plugin.getPlayerHashMap().forEach((key, value) -> {
+                            key.sendMessage(ID.TP_WARN_MESSAGE_2);
+                        });
+                    }
                 } else if (plugin.getTime().isCountdownFinished(plugin.getTime().getCounter() + 1)) {
-                    plugin.getPlayerHashMap().forEach((key, value) -> {
-                        key.sendMessage(ID.TP_WARN_MESSAGE_1);
-                    });
+                    if (plugin.getSettings().isGetWarnedBeforeTeleport()) {
+                        plugin.getPlayerHashMap().forEach((key, value) -> {
+                            key.sendMessage(ID.TP_WARN_MESSAGE_1);
+                        });
+                    }
                 }
             }
         }, 20, 20);

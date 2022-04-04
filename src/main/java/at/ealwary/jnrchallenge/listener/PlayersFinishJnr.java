@@ -23,7 +23,7 @@ public class PlayersFinishJnr implements Listener {
         Player player = event.getPlayer();
         if (player.getWorld() == plugin.getJnrWorld()) {
             Bukkit.broadcastMessage("d1");
-            if (player.getWorld().getBlockAt(player.getLocation().getBlockX(), player.getLocation().getBlockY() - 1, player.getLocation().getBlockZ()).getBlockData().getMaterial().equals(Material.GOLD_BLOCK)) {
+            if (player.getWorld().getBlockAt(player.getLocation().getBlockX(), player.getLocation().getBlockY() - 1, player.getLocation().getBlockZ()).getLocation() == plugin.getCurrentJnr().getGoal()) {        //.getBlockData().getMaterial().equals(Material.GOLD_BLOCK)
                 Bukkit.broadcastMessage("d2");
                 if (plugin.getPlayerHashMap().get(player) != 0) return;
                 Bukkit.broadcastMessage("d3");
