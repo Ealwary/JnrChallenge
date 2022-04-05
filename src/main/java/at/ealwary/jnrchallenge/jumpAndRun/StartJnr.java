@@ -39,7 +39,7 @@ public class StartJnr {
     }
 
     private void stopTimer() {
-        plugin.getJnrTimer().stop();
+        //plugin.getJnrTimer().stop();
     }
 
     public void createJnr() {

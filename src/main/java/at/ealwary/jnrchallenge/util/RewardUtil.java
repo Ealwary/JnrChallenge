@@ -40,7 +40,7 @@ public class RewardUtil {
         rewardsList.add(new ItemBuilder(Material.ENCHANTED_BOOK).setDisplayName(ID.REWARD_NAME_START + "Enchanted Book: Silk Touch I").addEnchantment(Enchantment.SILK_TOUCH, 0).create());
         rewardsList.add(new ItemBuilder(Material.NETHERITE_HOE).setDisplayName(ID.REWARD_NAME_START + Material.NETHERITE_HOE.name()).addEnchantment(Enchantment.DIG_SPEED, 0).create());
         rewardsList.add(new ItemBuilder(Material.IRON_PICKAXE).setDisplayName(ID.REWARD_NAME_START + Material.IRON_PICKAXE.name()).addEnchantment(Enchantment.LUCK, 2).create());
-        rewardsList.add(new ItemBuilder(Material.DIAMOND_AXE).setDisplayName(ID.REWARD_NAME_START + Material.DIAMOND_AXE.name()).create());
+        rewardsList.add(new ItemBuilder(Material.DIAMOND_AXE).setDisplayName(ID.REWARD_NAME_START + Material.DIAMOND_AXE.name()).addEnchantment(Enchantment.DIG_SPEED, 1).create());
         rewardsList.add(new ItemBuilder(Material.DIAMOND_SHOVEL).setDisplayName(ID.REWARD_NAME_START + Material.DIAMOND_SHOVEL.name()).addEnchantment(Enchantment.DIG_SPEED, 3).create());
         rewardsList.add(new ItemBuilder(Material.ENDER_EYE).setDisplayName(ID.REWARD_NAME_START + Material.ENDER_EYE.name()).setAmount(3).create());
         rewardsList.add(new ItemBuilder(Material.PARROT_SPAWN_EGG).setDisplayName(ID.REWARD_NAME_START + Material.PARROT_SPAWN_EGG.name()).create());

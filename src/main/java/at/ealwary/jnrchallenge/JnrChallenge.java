@@ -3,7 +3,6 @@ package at.ealwary.jnrchallenge;
 import at.ealwary.jnrchallenge.command.ChallengeCommand;
 import at.ealwary.jnrchallenge.command.SettingsCommand;
 import at.ealwary.jnrchallenge.config.ConfigManager;
-import at.ealwary.jnrchallenge.jumpAndRun.JnrLocation;
 import at.ealwary.jnrchallenge.listener.*;
 import at.ealwary.jnrchallenge.object.InventoryItem;
 import at.ealwary.jnrchallenge.object.Jnr;
@@ -28,7 +27,6 @@ import java.util.HashMap;
 public final class JnrChallenge extends JavaPlugin {
 
     private World jnrWorld;
-    private JnrLocation jnrLocation;
     private Jnr currentJnr;
     private HashMap<Player, Integer> playerHashMap;         //0 = ingame; 1 = geschafft; 2 = tot;
     private HashMap<Player, ArrayList<InventoryItem>> playerInventories;
@@ -43,7 +41,6 @@ public final class JnrChallenge extends JavaPlugin {
 
     @Override
     public void onEnable() {
-//        jnrLocation = new JnrLocation(this);
         currentJnr = null;
         playerHashMap = new HashMap<>();
         init(Bukkit.getPluginManager());
@@ -75,8 +72,6 @@ public final class JnrChallenge extends JavaPlugin {
         jnrTimer = new JnrTimer(this);
 
         worldUtil.createWorld();
-//        jnrLocation.createJnr();
-//        jnrLocation.fillJnr();
         time = new Time(0);
         settings = new Settings();
         rewardUtil = new RewardUtil(this);
@@ -87,7 +82,6 @@ public final class JnrChallenge extends JavaPlugin {
         configManager.loadConfig();
         configManager.saveConfigAsynchronously();
 
-//        new JnrLocation(this);
     }
 
     public HashMap<Player, Integer> getPlayerHashMap() {
@@ -104,10 +98,6 @@ public final class JnrChallenge extends JavaPlugin {
 
     public Time getTime() {
         return time;
-    }
-
-    public JnrLocation getJnrLocation() {
-        return jnrLocation;
     }
 
     public Settings getSettings() {
@@ -155,9 +145,6 @@ public final class JnrChallenge extends JavaPlugin {
     }
 }
 
-//Delete JnrLocation?
 //PlayerInvenotrys: Clear after restore
-//Recognise goal
 //Start, continue, pause tabbar machen
-//Sounds bei Warnmessage
 //SORT SETTINGS!

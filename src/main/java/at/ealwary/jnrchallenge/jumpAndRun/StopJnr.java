@@ -94,7 +94,7 @@ public class StopJnr {
 
     private void resetStats() {
         plugin.getPlayerHashMap().forEach((key, value) -> {
-            value = 0;
+            plugin.getPlayerHashMap().replace(key, 0);
         });
     }
 

@@ -45,6 +45,7 @@ public class PlayerDamageListener implements Listener {
             return;
         }
 
+        player.teleport(plugin.getCurrentJnr().getSpawnLocation());
         player.setGameMode(GameMode.SPECTATOR);
     }
 
