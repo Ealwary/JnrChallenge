@@ -53,11 +53,17 @@ public class StartJnr {
         for (int i = 0; i < jumpLocs.length + 1; i++) {
             if (i == 0) {
                 int randX = new Random().nextInt(3);
-                int x = spawnLocation.getBlockX() + randX;
+                int randPlusOrMinus = new Random().nextInt(2);
+                int x = spawnLocation.getBlockX();
+                if (randPlusOrMinus == 0) {
+                    x = x + randX;
+                } else {
+                    x = x - randX;
+                }
                 int randY = new Random().nextInt(2);
                 int y = spawnLocation.getBlockY() + randY;
-                int randZ = new Random().nextInt(5);
-                int z = spawnLocation.getBlockZ() + randZ;
+                int randZ = new Random().nextInt(3);
+                int z = spawnLocation.getBlockZ() + randZ + 1;
                 if (y != 1) {
                     z = z + 1;
                 }
@@ -68,8 +74,8 @@ public class StartJnr {
                 int x = jumpLocs[i - 1].getBlockX() + randX;
                 int randY = new Random().nextInt(2);
                 int y = jumpLocs[i - 1].getBlockY() + randY;
-                int randZ = new Random().nextInt(5);
-                int z = jumpLocs[i - 1].getBlockZ() + randZ;
+                int randZ = new Random().nextInt(3);
+                int z = jumpLocs[i - 1].getBlockZ() + randZ + 1;
                 if (y != 1) {
                     z = z + 1;
                 }
@@ -80,8 +86,8 @@ public class StartJnr {
                 int x = jumpLocs[i - 1].getBlockX() + randX;
                 int randY = new Random().nextInt(2);
                 int y = jumpLocs[i - 1].getBlockY() + randY;
-                int randZ = new Random().nextInt(5);
-                int z = jumpLocs[i - 1].getBlockZ() + randZ;
+                int randZ = new Random().nextInt(3);
+                int z = jumpLocs[i - 1].getBlockZ() + randZ + 1;
                 if (y != 1) {
                     z = z + 1;
                 }

@@ -6,6 +6,7 @@ import at.ealwary.jnrchallenge.object.Jnr;
 import at.ealwary.jnrchallenge.object.Settings;
 import at.ealwary.jnrchallenge.timer.JnrTimer;
 import at.ealwary.jnrchallenge.util.ID;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
@@ -34,6 +35,9 @@ public class StopJnr {
 
     private void teleportBack() {
         plugin.getNormalLocations().forEach(Entity::teleport);
+        plugin.getNormalLocations().forEach((key, value) -> {
+            key.setGameMode(GameMode.SURVIVAL);
+        });
     }
 
     private void giveReward() {
@@ -54,10 +58,12 @@ public class StopJnr {
             if (value != 2) {
                 key.getInventory().clear();
                 ArrayList<InventoryItem> items = plugin.getPlayerInventories().get(key);
-                for (int i = 0; i < items.size(); i++) {
-                    key.getInventory().setItem(items.get(i).getSlot(), items.get(i).getItemStack());
+                if(items != null) {
+                    for (int i = 0; i < items.size(); i++) {
+                        key.getInventory().setItem(items.get(i).getSlot(), items.get(i).getItemStack());
+                    }
+                    plugin.getPlayerInventories().remove(key);
                 }
-                plugin.getPlayerInventories().remove(key);
             } else {
                 if (keepInventory) {
                     key.getInventory().clear();
@@ -78,8 +84,8 @@ public class StopJnr {
 
     private void continueTimer() {
         JnrTimer timer = new JnrTimer(plugin);
-        timer.start();
         plugin.setJnrTimer(timer);
+        plugin.getJnrTimer().start();
     }
 
     private void removeJnr() {

@@ -79,6 +79,11 @@ public class ItemBuilder {
         return this;
     }
 
+    public ItemBuilder setAmount(int amount) {
+        this.itemStack.setAmount(amount);
+        return this;
+    }
+
     public ItemStack create() {
         this.itemStack.setItemMeta(this.itemMeta);
         return this.itemStack;

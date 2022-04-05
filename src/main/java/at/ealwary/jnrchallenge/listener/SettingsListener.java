@@ -39,8 +39,11 @@ public class SettingsListener implements Listener {
             case 20: {      //timer
                 plugin.getSettings().setShowTimer(!plugin.getSettings().isShowTimer());
                 reopenInv(player);
+                timerUtil = plugin.getTimerUtil();
                 if (plugin.getSettings().isShowTimer()) {
                     timerUtil.setTimer();
+                } else {
+                    timerUtil.deleteTimer();
                 }
                 break;
             }

@@ -5,6 +5,8 @@ import at.ealwary.jnrchallenge.jumpAndRun.StartJnr;
 import at.ealwary.jnrchallenge.object.Time;
 import at.ealwary.jnrchallenge.util.ID;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class JnrTimer extends Timer {
 
@@ -20,7 +22,7 @@ public class JnrTimer extends Timer {
     @Override
     public void start() {
         isRunning = true;
-        taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+        taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new BukkitRunnable() {
             @Override
             public void run() {
                 plugin.setTime(new Time(plugin.getTime().getCounter() + 1));
@@ -37,23 +39,29 @@ public class JnrTimer extends Timer {
                     if (plugin.getSettings().isGetWarnedBeforeTeleport()) {
                         plugin.getPlayerHashMap().forEach((key, value) -> {
                             key.sendMessage(ID.TP_WARN_MESSAGE_3);
+                            key.playSound(key.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1f, 1f);
                         });
                     }
                 } else if (plugin.getTime().isCountdownFinished(plugin.getTime().getCounter() + 2)) {
                     if (plugin.getSettings().isGetWarnedBeforeTeleport()) {
                         plugin.getPlayerHashMap().forEach((key, value) -> {
                             key.sendMessage(ID.TP_WARN_MESSAGE_2);
+                            key.playSound(key.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1f, 1f);
                         });
                     }
                 } else if (plugin.getTime().isCountdownFinished(plugin.getTime().getCounter() + 1)) {
+                    plugin.getPlayerHashMap().forEach((key, value) -> {
+                        value = 0;
+                    });
                     if (plugin.getSettings().isGetWarnedBeforeTeleport()) {
                         plugin.getPlayerHashMap().forEach((key, value) -> {
                             key.sendMessage(ID.TP_WARN_MESSAGE_1);
+                            key.playSound(key.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1f, 1f);
                         });
                     }
                 }
             }
-        }, 20, 20);
+        }.runTaskTimerAsynchronously(plugin, 20, 20));
 
     }
 

@@ -10,8 +10,8 @@ import at.ealwary.jnrchallenge.object.Jnr;
 import at.ealwary.jnrchallenge.object.Settings;
 import at.ealwary.jnrchallenge.object.Time;
 import at.ealwary.jnrchallenge.timer.JnrTimer;
-import at.ealwary.jnrchallenge.util.ID;
 import at.ealwary.jnrchallenge.util.RewardUtil;
+import at.ealwary.jnrchallenge.util.TabCompleterUtil;
 import at.ealwary.jnrchallenge.util.TimerUtil;
 import at.ealwary.jnrchallenge.util.WorldUtil;
 import org.bukkit.Bukkit;
@@ -64,10 +64,11 @@ public final class JnrChallenge extends JavaPlugin {
         pluginManager.registerEvents(new EnvironmentListener(this), this);
         pluginManager.registerEvents(new PlayerConnectionListener(this), this);
         pluginManager.registerEvents(new PlayerDamageListener(this), this);
-        pluginManager.registerEvents(new PlayersFinishJnr(this), this);
+        pluginManager.registerEvents(new PlayersFinishJnrListener(this), this);
         pluginManager.registerEvents(new SettingsListener(this), this);
 
         getCommand("challenge").setExecutor(new ChallengeCommand(this));
+        getCommand("challenge").setTabCompleter(new TabCompleterUtil());
         getCommand("settings").setExecutor(new SettingsCommand(this));
 
         WorldUtil worldUtil = new WorldUtil(this);
@@ -157,3 +158,6 @@ public final class JnrChallenge extends JavaPlugin {
 //Delete JnrLocation?
 //PlayerInvenotrys: Clear after restore
 //Recognise goal
+//Start, continue, pause tabbar machen
+//Sounds bei Warnmessage
+//SORT SETTINGS!
