@@ -45,7 +45,7 @@ public final class JnrChallenge extends JavaPlugin {
         playerHashMap = new HashMap<>();
         init(Bukkit.getPluginManager());
 
-        for(Player current : Bukkit.getOnlinePlayers()) {
+        for (Player current : Bukkit.getOnlinePlayers()) {
             playerHashMap.put(current, 0);
         }
     }
@@ -124,6 +124,7 @@ public final class JnrChallenge extends JavaPlugin {
         return jnrTimer;
     }
 
+
     public void setTime(Time time) {
         this.time = time;
     }
@@ -136,15 +137,7 @@ public final class JnrChallenge extends JavaPlugin {
         this.jnrTimer = jnrTimer;
     }
 
-    public void setSettings(Settings settings) {
-        this.settings = settings;
-    }
-
     public void setCurrentJnr(Jnr currentJnr) {
         this.currentJnr = currentJnr;
     }
 }
-
-//PlayerInvenotrys: Clear after restore
-//Start, continue, pause tabbar machen
-//SORT SETTINGS!

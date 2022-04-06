@@ -19,10 +19,6 @@ public class RewardUtil {
         addRewards();
     }
 
-    public ArrayList<ItemStack> getRewards() {
-        return rewardsList;
-    }
-
     public ItemStack getRandomReward() {
         Collections.shuffle(rewardsList);
         return rewardsList.get(0);

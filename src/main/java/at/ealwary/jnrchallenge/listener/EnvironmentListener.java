@@ -15,7 +15,7 @@ public class EnvironmentListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        if(!(event.getPlayer().getWorld() == plugin.getJnrWorld())) return;
+        if (!(event.getPlayer().getWorld() == plugin.getJnrWorld())) return;
         event.setCancelled(true);
     }
 }

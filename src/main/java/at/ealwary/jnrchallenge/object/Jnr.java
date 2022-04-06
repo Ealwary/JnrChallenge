@@ -32,7 +32,7 @@ public class Jnr {
         World world = plugin.getJnrWorld();
         world.getBlockAt(spawnLocation).setType(spawnMaterial);
         world.getBlockAt(goal).setType(goalMaterial);
-        for(Location currentLocation : jumpLocations) {
+        for (Location currentLocation : jumpLocations) {
             world.getBlockAt(currentLocation).setType(jumpMaterial);
         }
     }
@@ -41,32 +41,12 @@ public class Jnr {
         World world = plugin.getJnrWorld();
         world.getBlockAt(spawnLocation).setType(Material.AIR);
         world.getBlockAt(goal).setType(Material.AIR);
-        for(Location currentLocation : jumpLocations) {
+        for (Location currentLocation : jumpLocations) {
             world.getBlockAt(currentLocation).setType(Material.AIR);
         }
     }
 
-    public Location getGoal() {
-        return goal;
-    }
-
     public Location getSpawnLocation() {
         return spawnLocation;
-    }
-
-    public Location[] getJumpLocations() {
-        return jumpLocations;
-    }
-
-    public void setGoal(Location goal) {
-        this.goal = goal;
-    }
-
-    public void setSpawnLocation(Location spawnLocation) {
-        this.spawnLocation = spawnLocation;
-    }
-
-    public void setJumpLocations(Location[] jumpLocations) {
-        this.jumpLocations = jumpLocations;
     }
 }

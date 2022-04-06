@@ -49,8 +49,8 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder addAllItemFlags(){
-        for(ItemFlag itemFlag : ItemFlag.values()){
+    public ItemBuilder addAllItemFlags() {
+        for (ItemFlag itemFlag : ItemFlag.values()) {
             itemMeta.addItemFlags(itemFlag);
         }
         itemStack.setItemMeta(itemMeta);
@@ -67,14 +67,14 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder addLore(String lore){
+    public ItemBuilder addLore(String lore) {
         List<String> aLore = this.itemMeta.getLore() != null ? this.itemMeta.getLore() : new ArrayList<>();
         aLore.add(lore);
         this.itemMeta.setLore(aLore);
         return this;
     }
 
-    public ItemBuilder setLocalizedName(String name){
+    public ItemBuilder setLocalizedName(String name) {
         this.itemMeta.setLocalizedName(name);
         return this;
     }

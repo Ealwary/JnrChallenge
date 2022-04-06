@@ -22,7 +22,7 @@ public class PlayerDamageListener implements Listener {
         if (!(event.getEntity() instanceof Player)) return;
         Player player = (Player) event.getEntity();
 
-        if(plugin.getJnrWorld() == null) return;
+        if (plugin.getJnrWorld() == null) return;
         if (player.getWorld() == plugin.getJnrWorld()) {
             event.setCancelled(true);
         }
@@ -31,11 +31,11 @@ public class PlayerDamageListener implements Listener {
 
     @EventHandler
     public void onPlayerFallDamage(EntityDamageEvent event) {
-        if(!(event.getEntity() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player)) return;
         if (event.getCause() != EntityDamageEvent.DamageCause.FALL) return;
         Player player = ((Player) event.getEntity()).getPlayer();
-        if(plugin.getJnrWorld() == null) return;
-        if(player.getWorld() != plugin.getJnrWorld()) return;
+        if (plugin.getJnrWorld() == null) return;
+        if (player.getWorld() != plugin.getJnrWorld()) return;
         plugin.getPlayerHashMap().put(player, 2);
 
         event.setCancelled(true);

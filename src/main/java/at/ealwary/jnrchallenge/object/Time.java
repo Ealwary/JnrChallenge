@@ -5,16 +5,13 @@ public class Time {
     private int hours;
     private int minutes;
     private int seconds;
-    private int finishedCountdowns;
 
     public Time(int counter) {
-        finishedCountdowns = 0;
         this.counter = counter;
 
         seconds = counter % 60;
         minutes = ((counter - seconds) / 60 % 60);
         hours = (counter - seconds - minutes * 60) / 60 / 60;
-
     }
 
 
@@ -39,15 +36,6 @@ public class Time {
 
     public int getCounter() {
         return counter;
-    }
-
-    public int getFinishedCountdowns() {
-        finishedCountdowns = (counter - (counter % (60 * 5))) / 60 * 5;
-        return finishedCountdowns;
-    }
-
-    public void addCounter() {
-        this.counter = this.counter++;
     }
 
     public boolean isCountdownFinished() {

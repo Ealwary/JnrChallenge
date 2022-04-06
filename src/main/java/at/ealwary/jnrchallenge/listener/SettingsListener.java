@@ -1,7 +1,6 @@
 package at.ealwary.jnrchallenge.listener;
 
 import at.ealwary.jnrchallenge.JnrChallenge;
-import at.ealwary.jnrchallenge.object.Settings;
 import at.ealwary.jnrchallenge.util.ID;
 import at.ealwary.jnrchallenge.util.TimerUtil;
 import at.ealwary.jnrchallenge.view.SettingsView;
@@ -35,8 +34,8 @@ public class SettingsListener implements Listener {
         Player player = (Player) event.getWhoClicked();
 
         switch (event.getSlot()) {
-            case 11:
-            case 20: {      //timer
+            case 10:
+            case 19: {      //timer
                 plugin.getSettings().setShowTimer(!plugin.getSettings().isShowTimer());
                 reopenInv(player);
                 timerUtil = plugin.getTimerUtil();
@@ -56,23 +55,17 @@ public class SettingsListener implements Listener {
                 break;
             }
 
-            case 13:
-            case 22: {      //reward
+            case 14:
+            case 23: {      //reward
                 plugin.getSettings().setGetReward(!plugin.getSettings().isGetReward());
                 reopenInv(player);
                 break;
             }
 
-            case 14:
-            case 23: {      //warn
+            case 16:
+            case 25: {      //warn
                 plugin.getSettings().setGetWarnedBeforeTeleport(!plugin.getSettings().isGetWarnedBeforeTeleport());
                 reopenInv(player);
-                break;
-            }
-
-            case 15:
-            case 24: {      //saveInventory
-
                 break;
             }
 

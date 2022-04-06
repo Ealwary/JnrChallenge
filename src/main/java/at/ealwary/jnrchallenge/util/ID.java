@@ -15,7 +15,9 @@ public class ID {
             CHALLENGE_ALREADY_PAUSED = PREFIX + "§cDie Challenge ist bereits pausiert.",
             CHALLENGE_PAUSED = PREFIX + "§aDie Challenge wurde pausiert.",
             CHALLENGE_RESUMED = PREFIX + "§aDie Challenge wird ",
-            NO_MYSQL_CON = PREFIX + "§cDa keine MySQL-Connection vorhanden ist, kann diese Einstellung nicht aktiviert werden (Überprüfe die config.yml)";
+            CHALLENGE_RESET_CONFIRM = PREFIX + "§cFalls du dir sicher bist, dass der Timer zurückgesetzt werden soll, führe bitte §6/challenge reset confirm §caus.",
+            CHALLENGE_RESET_SUCCESED = PREFIX + "§aDie Challenge wurde erfolgreich zurückgesetzt.",
+            RECEIVED_REWARD = ID.PREFIX + "§aDu hast eine Belohnung erhalten!";
 
 
     //Inventory Names

@@ -59,6 +59,6 @@ public class ConfigManager {
             public void run() {
                 saveConfig();
             }
-        }.runTaskTimerAsynchronously(plugin, 20*60, 20*60);
+        }.runTaskTimerAsynchronously(plugin, 20 * 60, 20 * 60);
     }
 }

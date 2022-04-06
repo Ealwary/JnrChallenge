@@ -5,10 +5,8 @@ import at.ealwary.jnrchallenge.object.InventoryItem;
 import at.ealwary.jnrchallenge.object.Jnr;
 import at.ealwary.jnrchallenge.object.Settings;
 import at.ealwary.jnrchallenge.util.ID;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 
 import java.util.ArrayList;
@@ -24,7 +22,6 @@ public class StartJnr {
         settings = plugin.getSettings();
 
         bindPlayerLocations();
-        stopTimer();
         createJnr();
         sendMessageToPlayers();
         saveInventories();
@@ -33,13 +30,7 @@ public class StartJnr {
     }
 
     private void bindPlayerLocations() {
-        plugin.getPlayerHashMap().forEach((key, value) -> {
-            plugin.getNormalLocations().put(key, key.getLocation());
-        });
-    }
-
-    private void stopTimer() {
-        //plugin.getJnrTimer().stop();
+        plugin.getPlayerHashMap().forEach((key, value) -> plugin.getNormalLocations().put(key, key.getLocation()));
     }
 
     public void createJnr() {
@@ -52,47 +43,11 @@ public class StartJnr {
 
         for (int i = 0; i < jumpLocs.length + 1; i++) {
             if (i == 0) {
-                int randX = new Random().nextInt(3);
-                int randPlusOrMinus = new Random().nextInt(2);
-                int x = spawnLocation.getBlockX();
-                if (randPlusOrMinus == 0) {
-                    x = x + randX;
-                } else {
-                    x = x - randX;
-                }
-                int randY = new Random().nextInt(2);
-                int y = spawnLocation.getBlockY() + randY;
-                int randZ = new Random().nextInt(3);
-                int z = spawnLocation.getBlockZ() + randZ + 1;
-                if (y != 1) {
-                    z = z + 1;
-                }
-
-                jumpLocs[0] = new Location(world, x, y, z);
+                jumpLocs[0] = createJnrUtil(spawnLocation);
             } else if (i == 6) {
-                int randX = new Random().nextInt(3);
-                int x = jumpLocs[i - 1].getBlockX() + randX;
-                int randY = new Random().nextInt(2);
-                int y = jumpLocs[i - 1].getBlockY() + randY;
-                int randZ = new Random().nextInt(3);
-                int z = jumpLocs[i - 1].getBlockZ() + randZ + 1;
-                if (y != 1) {
-                    z = z + 1;
-                }
-
-                jumpGoal = new Location(world, x, y, z);
+                jumpGoal = createJnrUtil(jumpLocs[i - 1]);
             } else {
-                int randX = new Random().nextInt(3);
-                int x = jumpLocs[i - 1].getBlockX() + randX;
-                int randY = new Random().nextInt(2);
-                int y = jumpLocs[i - 1].getBlockY() + randY;
-                int randZ = new Random().nextInt(3);
-                int z = jumpLocs[i - 1].getBlockZ() + randZ + 1;
-                if (y != 1) {
-                    z = z + 1;
-                }
-
-                jumpLocs[i] = new Location(world, x, y, z);
+                jumpLocs[i] = createJnrUtil(jumpLocs[i - 1]);
             }
         }
 
@@ -100,10 +55,32 @@ public class StartJnr {
         plugin.setCurrentJnr(this.jnr);
     }
 
+    private Location createJnrUtil(Location lastLoc) {
+        World world = plugin.getJnrWorld();
+
+        int randX = new Random().nextInt(3);
+        int randPlusOrMinus = new Random().nextInt(2);
+        int x = lastLoc.getBlockX();
+        if (randPlusOrMinus == 0) {
+            x = x + randX;
+        } else {
+            x = x - randX;
+        }
+        int randY = new Random().nextInt(2);
+        int y = lastLoc.getBlockY() + randY;
+        int randZ = new Random().nextInt(3);
+        int z = lastLoc.getBlockZ() + randZ + 1;
+        if (y != 1) {
+            z = z + 1;
+        }
+
+        Location thisLoc = new Location(world, x, y, z);
+        return thisLoc;
+    }
+
+
     public void sendMessageToPlayers() {
-        plugin.getPlayerHashMap().forEach((key, value) -> {
-            key.sendMessage(ID.TP_MESSAGE);
-        });
+        plugin.getPlayerHashMap().forEach((key, value) -> key.sendMessage(ID.TP_MESSAGE));
     }
 
     public void saveInventories() {
@@ -126,7 +103,7 @@ public class StartJnr {
     }
 
     private void teleport() {
-        plugin.getPlayerHashMap().forEach((key, value) -> {         //for(Player current: Bukkit.getPlayers) ???
+        plugin.getPlayerHashMap().forEach((key, value) -> {
             key.teleport(jnr.getSpawnLocation());
             key.getInventory().clear();
         });

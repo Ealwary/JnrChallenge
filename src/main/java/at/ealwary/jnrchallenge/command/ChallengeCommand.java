@@ -1,6 +1,7 @@
 package at.ealwary.jnrchallenge.command;
 
 import at.ealwary.jnrchallenge.JnrChallenge;
+import at.ealwary.jnrchallenge.object.Time;
 import at.ealwary.jnrchallenge.timer.JnrTimer;
 import at.ealwary.jnrchallenge.util.ID;
 import org.bukkit.Bukkit;
@@ -8,8 +9,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.PlayerInventory;
 
 public class ChallengeCommand implements CommandExecutor {
     private JnrChallenge plugin;
@@ -30,13 +29,21 @@ public class ChallengeCommand implements CommandExecutor {
             return false;
         }
 
-        if (args.length != 1) {
+        if (args.length != 1 && args.length != 2) {
             player.sendMessage(ID.WRONG_USAGE + "challenge <start/resume/pause>");
             return false;
         }
 
+        if (args.length == 2) {
+            if (args[0].equalsIgnoreCase("reset") && args[1].equalsIgnoreCase("confirm")) {
+                plugin.setTime(new Time(0));
+                player.sendMessage(ID.CHALLENGE_RESET_SUCCESED);
+            }
+            return false;
+        }
+
         if (args[0].equalsIgnoreCase("start") || args[0].equalsIgnoreCase("resume")) {
-            if(plugin.getJnrTimer().isRunning()) {
+            if (plugin.getJnrTimer().isRunning()) {
                 player.sendMessage(ID.CHALLENGE_ALREADY_RUNNING);
             } else {
                 JnrTimer jnrTimer = new JnrTimer(plugin);
@@ -45,12 +52,14 @@ public class ChallengeCommand implements CommandExecutor {
                 player.sendMessage(ID.CHALLENGE_RESUMED + (args[0].equalsIgnoreCase("start") ? "gestartet." : "fortgesetzt."));
             }
         } else if (args[0].equalsIgnoreCase("pause")) {
-            if(!plugin.getJnrTimer().isRunning()) {
+            if (!plugin.getJnrTimer().isRunning()) {
                 player.sendMessage(ID.CHALLENGE_ALREADY_PAUSED);
             } else {
                 plugin.getJnrTimer().stop();
                 player.sendMessage(ID.CHALLENGE_PAUSED);
             }
+        } else if (args[0].equalsIgnoreCase("reset")) {
+            player.sendMessage(ID.CHALLENGE_RESET_CONFIRM);
         } else {
             player.sendMessage(ID.WRONG_USAGE + "challenge <start/resume/pause>");
             return false;

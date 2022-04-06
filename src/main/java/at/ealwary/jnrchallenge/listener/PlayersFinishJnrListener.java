@@ -21,14 +21,10 @@ public class PlayersFinishJnrListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        if(plugin.getJnrWorld() == null) return;
+        if (plugin.getJnrWorld() == null) return;
         if (player.getWorld() == plugin.getJnrWorld()) {
-            Bukkit.broadcastMessage("d1");
-            if (player.getWorld().getBlockAt(player.getLocation().getBlockX(), player.getLocation().getBlockY() - 1, player.getLocation().getBlockZ()).getType().equals(Material.GOLD_BLOCK)) {        //.getBlockData().getMaterial().equals(Material.GOLD_BLOCK)
-                Bukkit.broadcastMessage("d2");
-                Bukkit.broadcastMessage(String.valueOf(plugin.getPlayerHashMap().get(player)));
+            if (player.getWorld().getBlockAt(player.getLocation().getBlockX(), player.getLocation().getBlockY() - 1, player.getLocation().getBlockZ()).getType().equals(Material.GOLD_BLOCK)) {
                 if (plugin.getPlayerHashMap().get(player) != 0) return;
-                Bukkit.broadcastMessage("d3");
                 plugin.getPlayerHashMap().put(player, 1);
 
                 if (!plugin.getPlayerHashMap().containsValue(0)) {

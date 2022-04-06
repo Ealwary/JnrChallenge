@@ -4,16 +4,14 @@ public class Settings {
 
     private boolean showTimer;
     private boolean keepInventory;
-    private boolean getReward;                      //
-    private boolean getWarnedBeforeTeleport;        //
-    private boolean saveInventorysToMySQL;
+    private boolean getReward;
+    private boolean getWarnedBeforeTeleport;
 
     public Settings() {
         this.showTimer = true;
         this.keepInventory = true;
         this.getReward = true;
         this.getWarnedBeforeTeleport = true;
-        this.saveInventorysToMySQL = false;
     }
 
     public boolean isShowTimer() {
@@ -26,10 +24,6 @@ public class Settings {
 
     public boolean isGetReward() {
         return getReward;
-    }
-
-    public boolean isSaveInventorysToMySQL() {
-        return saveInventorysToMySQL;
     }
 
     public void setShowTimer(boolean showTimer) {
@@ -50,9 +44,5 @@ public class Settings {
 
     public void setGetWarnedBeforeTeleport(boolean getWarnedBeforeTeleport) {
         this.getWarnedBeforeTeleport = getWarnedBeforeTeleport;
-    }
-
-    public void setSaveInventorysToMySQL(boolean saveInventorysToMySQL) {
-        this.saveInventorysToMySQL = saveInventorysToMySQL;
     }
 }

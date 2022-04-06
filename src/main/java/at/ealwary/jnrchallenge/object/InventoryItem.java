@@ -1,8 +1,6 @@
 package at.ealwary.jnrchallenge.object;
 
-import at.ealwary.jnrchallenge.JnrChallenge;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 public class InventoryItem {
     private ItemStack itemStack;

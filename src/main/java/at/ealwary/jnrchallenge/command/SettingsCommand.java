@@ -19,12 +19,12 @@ public class SettingsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(!(sender instanceof Player)) {
+        if (!(sender instanceof Player)) {
             Bukkit.getConsoleSender().sendMessage(ID.ONLY_FOR_PLAYERS);
             return false;
         }
         Player player = (Player) sender;
-        if(!player.hasPermission(ID.PERMISSION_SETTINGS)) {
+        if (!player.hasPermission(ID.PERMISSION_SETTINGS)) {
             player.sendMessage(ID.NO_PERMS);
             return false;
         }
