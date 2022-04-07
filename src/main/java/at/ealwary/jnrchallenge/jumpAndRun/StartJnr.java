@@ -3,6 +3,7 @@ package at.ealwary.jnrchallenge.jumpAndRun;
 import at.ealwary.jnrchallenge.JnrChallenge;
 import at.ealwary.jnrchallenge.object.InventoryItem;
 import at.ealwary.jnrchallenge.object.Jnr;
+import at.ealwary.jnrchallenge.object.PlayerCondition;
 import at.ealwary.jnrchallenge.object.Settings;
 import at.ealwary.jnrchallenge.util.ID;
 import org.bukkit.Location;
@@ -21,7 +22,7 @@ public class StartJnr {
         this.plugin = plugin;
         settings = plugin.getSettings();
 
-        bindPlayerLocations();
+        bindPlayerInformation();
         createJnr();
         sendMessageToPlayers();
         saveInventories();
@@ -29,8 +30,13 @@ public class StartJnr {
         teleport();
     }
 
-    private void bindPlayerLocations() {
+    private void bindPlayerInformation() {
         plugin.getPlayerHashMap().forEach((key, value) -> plugin.getNormalLocations().put(key, key.getLocation()));
+        plugin.getPlayerHashMap().forEach((key, value) -> {
+            plugin.getPlayerCondition().put(key, new PlayerCondition(key.getHealth(), key.getFoodLevel()));
+            key.setFoodLevel(20);
+            key.setHealth(20);
+        });
     }
 
     public void createJnr() {

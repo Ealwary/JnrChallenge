@@ -26,6 +26,7 @@ public class StopJnr {
 
         teleportBack();
         restoreInventory();
+        restoreCondition();
         giveReward();
         continueTimer();
         removeJnr();
@@ -77,6 +78,13 @@ public class StopJnr {
         });
     }
 
+    private void restoreCondition() {
+        plugin.getPlayerCondition().forEach((key, value) -> {
+            key.setHealth(value.getHealth());
+            key.setFoodLevel(value.getFoodLevel());
+        });
+    }
+
     private void continueTimer() {
         JnrTimer timer = new JnrTimer(plugin);
         plugin.setJnrTimer(timer);
@@ -89,6 +97,7 @@ public class StopJnr {
 
     private void resetStats() {
         plugin.getPlayerHashMap().forEach((key, value) -> plugin.getPlayerHashMap().replace(key, 0));
+        plugin.getPlayerCondition().forEach((key, value) -> plugin.getPlayerCondition().replace(key, null));
     }
 
 

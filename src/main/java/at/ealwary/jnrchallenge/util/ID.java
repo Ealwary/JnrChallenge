@@ -22,7 +22,7 @@ public class ID {
 
     //Inventory Names
     public static final String INVENTORY_NAME_START = "§a§l§m§n§k§m§8§2§l§8» ",
-            INVENTORY_NAME_SETTINGS = "Settings";
+            INVENTORY_NAME_SETTINGS = "§6§lSettings";
 
     //Item Names
     public static final String REWARD_NAME_START = "§6";

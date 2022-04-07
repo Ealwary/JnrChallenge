@@ -4,10 +4,7 @@ import at.ealwary.jnrchallenge.command.ChallengeCommand;
 import at.ealwary.jnrchallenge.command.SettingsCommand;
 import at.ealwary.jnrchallenge.config.ConfigManager;
 import at.ealwary.jnrchallenge.listener.*;
-import at.ealwary.jnrchallenge.object.InventoryItem;
-import at.ealwary.jnrchallenge.object.Jnr;
-import at.ealwary.jnrchallenge.object.Settings;
-import at.ealwary.jnrchallenge.object.Time;
+import at.ealwary.jnrchallenge.object.*;
 import at.ealwary.jnrchallenge.timer.JnrTimer;
 import at.ealwary.jnrchallenge.util.RewardUtil;
 import at.ealwary.jnrchallenge.util.TabCompleterUtil;
@@ -31,6 +28,7 @@ public final class JnrChallenge extends JavaPlugin {
     private HashMap<Player, Integer> playerHashMap;         //0 = ingame; 1 = geschafft; 2 = tot;
     private HashMap<Player, ArrayList<InventoryItem>> playerInventories;
     private HashMap<Player, Location> normalLocations;
+    private HashMap<Player, PlayerCondition> playerCondition;
     private Time time;
     private Settings settings;
     private RewardUtil rewardUtil;
@@ -77,6 +75,7 @@ public final class JnrChallenge extends JavaPlugin {
         rewardUtil = new RewardUtil(this);
         playerInventories = new HashMap<>();
         normalLocations = new HashMap<>();
+        playerCondition = new HashMap<>();
         timerUtil = new TimerUtil(this);
         configManager = new ConfigManager(this);
         configManager.loadConfig();
@@ -122,6 +121,10 @@ public final class JnrChallenge extends JavaPlugin {
 
     public JnrTimer getJnrTimer() {
         return jnrTimer;
+    }
+
+    public HashMap<Player, PlayerCondition> getPlayerCondition() {
+        return playerCondition;
     }
 
 

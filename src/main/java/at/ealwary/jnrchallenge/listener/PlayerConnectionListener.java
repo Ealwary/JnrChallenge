@@ -21,6 +21,7 @@ public class PlayerConnectionListener implements Listener {
         plugin.getPlayerHashMap().put(player, 0);
     }
 
+    @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         plugin.getPlayerHashMap().remove(player);
