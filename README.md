@@ -14,5 +14,5 @@ Zusätzlich gibt es Einstellungen, in welchen festgelegt werden kann, ob
 
 
 Befehle: 
-- challenge <start/resume/pause/reset>
-- settings
+- /challenge <start/resume/pause/reset>
+- /settings
